@@ -27,5 +27,15 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "jest-enzyme": "^4.0.2",
     "standard": "^10.0.3"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "jest",
+      "beforeAll",
+      "afterAll",
+      "expect"
+    ]
   }
 }
