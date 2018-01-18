@@ -1,5 +1,6 @@
 import React from 'react'
 import * as loadingStates from '../lib/loadingStates'
+import './component.css'
 
 class SurveyListComponent extends React.Component {
   constructor(props) {
