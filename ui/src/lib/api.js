@@ -9,4 +9,15 @@ export const indexSurveys = (resolve, reject) => {
     .catch(reject)
 }
 
-export default { getSurvey }
+export const showSurvey = (survey) => {
+  return fetch(`${baseURL}/api/v1${survey.url}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        return {}
+      }
+    })
+}
+
+export default { indexSurveys, showSurvey }
