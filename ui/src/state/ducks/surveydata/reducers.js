@@ -24,6 +24,18 @@ export default (state = defaultState, action) => {
         listStatus: loadingStates.FAILED,
         listOfSurveys: action.data.survey_results
       }
+    case types.SELECT_SURVEY:
+      return {
+        ...state,
+        selectedSurvey: action.survey,
+        selectedSurveyLoadedStatus: loadingStates.NOTLOADED
+      }
+    case types.LOAD_SURVEY_SUCCESS:
+      return {
+        ...state,
+        loadedSurvey: action.survey.survey_result_detail,
+        selectedSurveyLoadedStatus: loadingStates.LOADED
+      }
     default:
       return state
   }

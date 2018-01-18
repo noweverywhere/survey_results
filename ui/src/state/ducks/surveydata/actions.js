@@ -5,6 +5,26 @@ export const loadList = repository => ({
   repository
 })
 
+export const retrieveSurveyListSuccess = (data) => ({
+  type: types.LOADLIST_SUCCEED,
+  data
+})
+
+export const retrieveSurveyListFailed = (errorCode) => ({
+  type: types.LOADLIST_FAILED,
+  errorCode
+})
+
+export const selectSurvey = (survey) => ({
+  type: types.SELECT_SURVEY,
+  survey
+})
+
+export const showSurveySuccess = (survey) => ({
+  type: types.LOAD_SURVEY_SUCCESS,
+  survey
+})
+
 export default {
   loadList
 }

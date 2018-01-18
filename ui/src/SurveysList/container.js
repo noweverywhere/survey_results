@@ -6,7 +6,8 @@ const mapStateToProps = (state) => ({
   ...state.surveyDataState
 })
 const mapDispatchToProps = {
-  onLoad: surveyDataOperations.loadList
+  onLoad: surveyDataOperations.loadList,
+  selectSurvey: surveyDataOperations.selectSurvey
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SurveyListComponent)
