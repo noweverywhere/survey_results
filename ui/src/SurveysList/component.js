@@ -1,5 +1,6 @@
 import React from 'react'
 import * as loadingStates from '../lib/loadingStates'
+import SurveyListItem from '../views/components/SurveysListItem'
 import './component.css'
 
 class SurveyListComponent extends React.Component {
@@ -12,7 +13,19 @@ class SurveyListComponent extends React.Component {
 
   list() {
     return (
-      <h3>this is a list</h3>
+      <ul className="SurveysList__list">
+        {
+          this.props.listOfSurveys.map(
+            survey => (
+              <SurveyListItem
+                key={survey.url}
+                selected
+                onSelect={() => this.props.selectSurvey(survey)}
+                {...survey} />
+            )
+          )
+        }
+      </ul>
     )
   }
 
