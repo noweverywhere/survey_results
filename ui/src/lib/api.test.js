@@ -12,7 +12,7 @@ describe('API', () => {
 
   beforeAll(() => {
     originalApiBaseUrl = process.env.API_BASE_URL
-    process.env.API_BASE_URL = 'http://example.com/'
+    process.env.API_BASE_URL = 'http://example.com'
   })
 
   afterAll(() => {
@@ -20,6 +20,6 @@ describe('API', () => {
   })
 
   it('can fetch the surveys index', async () => {
-    return expect(api.getSurvey(json => json)).resolves.toEqual({foo: 'bar'})
+    return expect(api.indexSurveys(json => json)).resolves.toEqual({foo: 'bar'})
   })
 })
