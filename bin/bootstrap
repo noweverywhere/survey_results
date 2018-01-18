@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pushd api
+
+npm i
+
+popd
+
+pushd ui
+
+npm i
+
+popd
