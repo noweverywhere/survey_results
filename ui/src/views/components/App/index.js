@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
-import SurveysList from './SurveysList/container'
+import './styles.css'
+import SurveysList from '../../containers/SurveysList'
 
 class App extends Component {
   render () {

@@ -1,7 +1,7 @@
 import React from 'react'
-import * as loadingStates from '../lib/loadingStates'
-import SurveyListItem from '../views/components/SurveysListItem'
-import './component.css'
+import * as loadingStates from '../../../lib/loadingStates'
+import SurveyListItem from '../SurveysListItem'
+import './styles.css'
 
 class SurveyListComponent extends React.Component {
   constructor(props) {
@@ -30,6 +30,7 @@ class SurveyListComponent extends React.Component {
   }
 
   render() {
+    if (this.props.selectedSurvey) { return null }
     switch (this.props.listStatus) {
       case loadingStates.LOADED:
         return <div>{ this.list() }</div>
@@ -41,7 +42,7 @@ class SurveyListComponent extends React.Component {
       case loadingStates.LOADING:
       default:
         return (
-          <h3>LOADING...</h3>
+          <h3>LOADING SURVEYS LIST...</h3>
         )
     }
   }
