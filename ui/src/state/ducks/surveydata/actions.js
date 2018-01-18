@@ -25,6 +25,10 @@ export const showSurveySuccess = (survey) => ({
   survey
 })
 
+export const unselectSurvey = () => ({
+  type: types.UNSELECT_SURVEY,
+})
+
 export default {
-  loadList
+  loadList, unselectSurvey
 }

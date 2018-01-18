@@ -24,5 +24,5 @@ const selectSurvey = (survey) => {
 }
 
 export default {
-  loadList, selectSurvey
+  loadList, selectSurvey, unselectSurvey: actions.unselectSurvey
 }

@@ -30,6 +30,12 @@ export default (state = defaultState, action) => {
         selectedSurvey: action.survey,
         selectedSurveyLoadedStatus: loadingStates.NOTLOADED
       }
+    case types.UNSELECT_SURVEY:
+      return {
+        ...state,
+        selectedSurvey: undefined,
+        selectedSurveyLoadedStatus: loadingStates.NOTLOADED
+      }
     case types.LOAD_SURVEY_SUCCESS:
       return {
         ...state,
