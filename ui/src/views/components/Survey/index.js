@@ -1,11 +1,30 @@
 import React from 'react'
+import { BarChart, Bar } from 'recharts'
 import './styles.css'
 
-const SurveyQuestion = ({description, responseAverage}) => {
+const ResponsesGraph = ({responsesDistribution}) => {
+  if (!responsesDistribution) return <div>no</div>
+  return(
+    <div>
+      <BarChart
+        data={responsesDistribution}
+        width={50} height={25}>
+        <Bar dataKey="responsesInGroup" />
+      </BarChart>
+    </div>
+  )
+}
+
+const SurveyQuestion = ({
+  description, responseAverage, responsesDistribution
+}) => {
   return(
     <tr className="SurveyQuestion">
       <td>{description}</td>
       <td>{responseAverage}</td>
+      <td>
+        <ResponsesGraph responsesDistribution={responsesDistribution}/>
+      </td>
     </tr>
   )
 }
@@ -16,16 +35,20 @@ const SurveyTheme = ({name, questions}) => (
       <tr>
         <td><span className="SurveyTable__themeName">{name}</span></td>
         <td>Average Rating</td>
+        <td>Graph</td>
       </tr>
     </thead>
     <tbody>
     {
-      questions.map(({ description, responseAverage }, i) => (
-        <SurveyQuestion
-          key={i}
-          description={description}
-          responseAverage={responseAverage} />
-      ))
+      questions.map(
+        ({ description, responseAverage, responsesDistribution }, i) => (
+          <SurveyQuestion
+            key={i}
+            description={description}
+            responsesDistribution={responsesDistribution}
+            responseAverage={responseAverage} />
+        )
+      )
     }
     </tbody>
   </table>
