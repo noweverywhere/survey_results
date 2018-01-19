@@ -14,7 +14,7 @@ const SurveyTheme = ({name, questions}) => (
   <table className="SurveyTable ">
     <thead>
       <tr>
-        <td><th>{name}</th></td>
+        <td><span className="SurveyTable__themeName">{name}</span></td>
         <td>Average Rating</td>
       </tr>
     </thead>

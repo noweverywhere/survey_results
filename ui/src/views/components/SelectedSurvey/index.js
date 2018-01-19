@@ -26,7 +26,7 @@ class SelectedSurveyComponent extends React.Component {
     return(
       <div>
         <SurveyDescription survey={this.props.selectedSurvey} />
-        <button onClick={ this.props.unselectSurvey }>Unselect</button>
+        <button onClick={ this.props.unselectSurvey }>Unselect survey</button>
         { this.renderSurveyArea() }
       </div>
     )

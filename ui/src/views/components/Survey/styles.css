@@ -7,6 +7,10 @@
   background: #EEE;
 }
 
+.SurveyTable__themeName {
+  font-weight: bold;
+}
+
 .SurveyQuestion {
   padding-bottom: 0.5em;
 }

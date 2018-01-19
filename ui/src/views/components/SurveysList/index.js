@@ -14,6 +14,7 @@ class SurveyListComponent extends React.Component {
   list() {
     return (
       <div className="SurveysList__list">
+        <div>Select a servey below to view it's details:</div>
         {
           this.props.listOfSurveys.map(
             survey => (
