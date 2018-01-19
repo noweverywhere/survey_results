@@ -56,7 +56,7 @@ describe('surveydata/utils', () => {
 
     it('returns an array that with the response_contents grouped', () => {
       const tidiedQuestion = tidyQuestion(questions[0])
-      expect(tidiedQuestion.responseDistribution).toEqual([
+      expect(tidiedQuestion.responsesDistribution).toEqual([
         {responseContent: 5, responsesInGroup: 2},
         {responseContent: 1, responsesInGroup: 1},
       ])

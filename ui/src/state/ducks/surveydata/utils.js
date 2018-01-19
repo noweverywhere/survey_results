@@ -2,7 +2,7 @@ export const tidyQuestions = (questions) => {
   return questions.map(tidyQuestion)
 }
 
-const generateResponseDistribution = (responses) => {
+const generateResponsesDistribution = (responses) => {
   const groupResponses = (groupsArray, {response_content: responseContent}) => {
     const matchingGroup = groupsArray.filter(
       (group) => (group.responseContent === responseContent)
@@ -41,6 +41,6 @@ export const tidyQuestion = (question) => {
     description: question.description,
     responses,
     responseAverage: responseAverage.toFixed(1),
-    responseDistribution: generateResponseDistribution(responses)
+    responsesDistribution: generateResponsesDistribution(responses)
   }
 }
