@@ -15,6 +15,10 @@ export const tidyQuestion = (question) => {
 
   return {
     description: question.description,
-    responseAverage: responseAverage.toFixed(1)
+    responseAverage: responseAverage.toFixed(1),
+    responseDistribution: responses.reduce((rv, x) => {
+      (rv[x['response_content']] = rv[x['response_content']] || []).push(x)
+      return rv
+    }, {})
   }
 }
