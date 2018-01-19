@@ -10,8 +10,10 @@ class App extends Component {
         <header className='App-header'>
           <h1 className='App-title'>Survey Results</h1>
         </header>
-        <SurveysList />
-        <SelectedSurvey />
+        <div className="App__body">
+          <SurveysList />
+          <SelectedSurvey />
+        </div>
       </div>
     )
   }

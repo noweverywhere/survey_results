@@ -12,3 +12,7 @@
 .App-intro {
   font-size: large;
 }
+
+.App__body {
+  padding: 1em 1.5em;
+}
