@@ -3,9 +3,9 @@ import './styles.css'
 
 const SurveyQuestion = ({description, responseAverage}) => {
   return(
-    <tr >
-      <td className="SurveyQuestion">{description}</td>
-      <td className="SurveyQuestion">{responseAverage}</td>
+    <tr className="SurveyQuestion">
+      <td>{description}</td>
+      <td>{responseAverage}</td>
     </tr>
   )
 }
