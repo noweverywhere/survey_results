@@ -2,8 +2,50 @@ export const tidyQuestions = (questions) => {
   return questions.map(tidyQuestion)
 }
 
-const generateResponsesDistribution = (responses) => {
-  const groupResponses = (groupsArray, {response_content: responseContent}) => {
+const flatten = (acc, el) => {
+  const items = Array.isArray(el) ? el.reduce(flatten, []) : [el]
+  return acc.concat(items)
+}
+
+const createMissingGroupsFunctor = (currentGroup, groupsThatExist) => (
+  (_, index) => {
+    const rating = index + 1
+    const existingGroup = groupsThatExist
+      .filter((v) => {
+        return v.responseContent === rating
+      }).shift()
+    if (existingGroup) {
+      return currentGroup === existingGroup ? currentGroup : null
+    } else {
+      return {
+        responseContent: index + 1,
+        responsesInGroup: 0
+      }
+    }
+  }
+)
+
+const createGroupsForUnselectedResponses = (currentGroup, i, groupsThatExist) => {
+  const numberOfGroups = groupsThatExist.reduce(flatten, []).length
+  const highestResponse = (
+    groupsThatExist.reduce((highest, current) => (
+      current.responseContent > highest ? current.responseContent : highest
+    ), 0)
+  )
+
+  if (
+    highestResponse < numberOfGroups ||
+    highestResponse !== currentGroup.responseContent
+  ) {
+    return currentGroup
+  }
+  return new Array(highestResponse).fill()
+    .map(createMissingGroupsFunctor(currentGroup, groupsThatExist))
+    .filter((v) => (v))
+}
+
+export const generateResponsesDistribution = (responses) => {
+  const createResponseGroups = (groupsArray, {response_content: responseContent}) => {
     const matchingGroup = groupsArray.filter(
       (group) => (group.responseContent === responseContent)
     )[0] || {responsesInGroup: 0}
@@ -17,8 +59,15 @@ const generateResponsesDistribution = (responses) => {
       responsesInGroup: (responsesInGroup + 1)
     }, ...nonMatchingGroups]
   }
+  const arrangeFromSmallToBig = (a, b) => a.responseContent - b.responseContent
 
-  return responses.reduce(groupResponses, [])
+  return (
+    responses
+      .reduce(createResponseGroups, [])
+      .map(createGroupsForUnselectedResponses, [])
+      .reduce(flatten, [])
+      .sort(arrangeFromSmallToBig)
+  )
 }
 
 export const tidyQuestion = (question) => {

@@ -3,7 +3,7 @@ import { BarChart, Bar } from 'recharts'
 import './styles.css'
 
 const ResponsesGraph = ({responsesDistribution}) => {
-  if (!responsesDistribution) return <div>no</div>
+  if (!responsesDistribution) return null
   return(
     <div>
       <BarChart

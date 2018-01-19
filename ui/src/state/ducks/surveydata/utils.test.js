@@ -1,4 +1,9 @@
-import { cleanQuestionResponses, tidyQuestions, tidyQuestion } from './utils'
+import {
+  cleanQuestionResponses,
+  tidyQuestions,
+  tidyQuestion,
+  createGroupsForUnselectedResponses
+} from './utils'
 
 const questions = [
   {
@@ -22,8 +27,7 @@ const questions = [
         "question_id": 1,
         "respondent_id": 3,
         "response_content": "1"
-      },
-      {
+      }, {
         "id": 1,
         "question_id": 1,
         "respondent_id": 3,
@@ -57,8 +61,11 @@ describe('surveydata/utils', () => {
     it('returns an array that with the response_contents grouped', () => {
       const tidiedQuestion = tidyQuestion(questions[0])
       expect(tidiedQuestion.responsesDistribution).toEqual([
-        {responseContent: 5, responsesInGroup: 2},
         {responseContent: 1, responsesInGroup: 1},
+        {responseContent: 2, responsesInGroup: 0},
+        {responseContent: 3, responsesInGroup: 0},
+        {responseContent: 4, responsesInGroup: 0},
+        {responseContent: 5, responsesInGroup: 2},
       ])
     })
   })
