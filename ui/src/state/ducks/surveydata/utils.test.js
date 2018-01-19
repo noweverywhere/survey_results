@@ -21,7 +21,13 @@ const questions = [
         "id": 1,
         "question_id": 1,
         "respondent_id": 3,
-        "response_content": "2"
+        "response_content": "1"
+      },
+      {
+        "id": 1,
+        "question_id": 1,
+        "respondent_id": 3,
+        "response_content": "5"
       }
     ]
   }
@@ -38,7 +44,7 @@ describe('surveydata/utils', () => {
 
     it('returns average of ratings', () => {
       const tidiedQuestion = tidyQuestion(questions[0])
-      expect(tidiedQuestion.responseAverage).toEqual("3.5")
+      expect(tidiedQuestion.responseAverage).toEqual("3.7")
     })
   })
 })
