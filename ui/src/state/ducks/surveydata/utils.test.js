@@ -42,6 +42,13 @@ describe('surveydata/utils', () => {
       )
     })
 
+    it('returns response.response_content as int', () => {
+      const tidiedQuestion = tidyQuestion(questions[0])
+      expect(tidiedQuestion.responses[0].response_content).toEqual(
+        5
+      )
+    })
+
     it('returns average of ratings', () => {
       const tidiedQuestion = tidyQuestion(questions[0])
       expect(tidiedQuestion.responseAverage).toEqual("3.7")

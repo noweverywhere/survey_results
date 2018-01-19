@@ -3,11 +3,16 @@ export const tidyQuestions = (questions) => {
 }
 
 export const tidyQuestion = (question) => {
+  const responseContentToInt = (response) => ({
+    ...response,
+    response_content: parseInt(response.response_content, 10)
+  })
+
   const responses = question.survey_responses.filter(
     (res) => !(res.response_content === '')
-  )
+  ).map(responseContentToInt)
   const responsesSum = responses.reduce(
-    (a, res) => (a + parseInt(res.response_content, 10)),
+    (a, res) => (a + res.response_content),
     0
   )
   const responseCount = responses.length
@@ -15,6 +20,7 @@ export const tidyQuestion = (question) => {
 
   return {
     description: question.description,
+    responses,
     responseAverage: responseAverage.toFixed(1),
     responseDistribution: responses.reduce((rv, x) => {
       (rv[x['response_content']] = rv[x['response_content']] || []).push(x)
