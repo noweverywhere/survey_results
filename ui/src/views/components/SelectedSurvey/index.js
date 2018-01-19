@@ -1,12 +1,13 @@
 import React from 'react'
 import * as loadingStates from '../../../lib/loadingStates'
 import SurveyDescription from '../SurveyDescription'
+import Survey from '../Survey'
 
-class SurveyComponent extends React.Component {
-  renderSurvey() {
+class SelectedSurveyComponent extends React.Component {
+  renderSurveyArea() {
     switch (this.props.selectedSurveyLoadedStatus) {
       case loadingStates.LOADED:
-        return <pre>{JSON.stringify(this.props.loadedSurvey)}</pre>
+        return <Survey survey={this.props.loadedSurvey} />
       case loadingStates.FAILED:
         return (
           <h3>Something went wrong :(</h3>
@@ -24,12 +25,12 @@ class SurveyComponent extends React.Component {
     if(!this.props.selectedSurvey) { return null }
     return(
       <div>
-        <button onClick={ this.props.unselectSurvey }>Close</button>
-        { this.renderSurvey() }
         <SurveyDescription survey={this.props.selectedSurvey} />
+        <button onClick={ this.props.unselectSurvey }>Unselect</button>
+        { this.renderSurveyArea() }
       </div>
     )
   }
 }
 
-export default SurveyComponent
+export default SelectedSurveyComponent
