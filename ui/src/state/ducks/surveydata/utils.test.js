@@ -53,6 +53,14 @@ describe('surveydata/utils', () => {
       const tidiedQuestion = tidyQuestion(questions[0])
       expect(tidiedQuestion.responseAverage).toEqual("3.7")
     })
+
+    it('returns an array that with the response_contents grouped', () => {
+      const tidiedQuestion = tidyQuestion(questions[0])
+      expect(tidiedQuestion.responseDistribution).toEqual([
+        {responseContent: 5, responsesInGroup: 2},
+        {responseContent: 1, responsesInGroup: 1},
+      ])
+    })
   })
 })
 
