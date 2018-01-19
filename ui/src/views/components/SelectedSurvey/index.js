@@ -1,5 +1,6 @@
 import React from 'react'
 import * as loadingStates from '../../../lib/loadingStates'
+import SurveyDescription from '../SurveyDescription'
 
 class SurveyComponent extends React.Component {
   renderSurvey() {
@@ -25,6 +26,7 @@ class SurveyComponent extends React.Component {
       <div>
         <button onClick={ this.props.unselectSurvey }>Close</button>
         { this.renderSurvey() }
+        <SurveyDescription survey={this.props.selectedSurvey} />
       </div>
     )
   }

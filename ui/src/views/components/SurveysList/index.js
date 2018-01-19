@@ -13,7 +13,7 @@ class SurveyListComponent extends React.Component {
 
   list() {
     return (
-      <ul className="SurveysList__list">
+      <div className="SurveysList__list">
         {
           this.props.listOfSurveys.map(
             survey => (
@@ -21,11 +21,11 @@ class SurveyListComponent extends React.Component {
                 key={survey.url}
                 selected
                 onSelect={() => this.props.selectSurvey(survey)}
-                {...survey} />
+                selectedSurvey={survey} />
             )
           )
         }
-      </ul>
+      </div>
     )
   }
 

@@ -1,12 +1,15 @@
 import React from 'react'
+import SurveyDescription from '../SurveyDescription'
+import './styles.css'
 
-const SurveyListItem = ({
-  name, url, participant_count, response_rate, submitted_response_count, onSelect
-}) => (
-  <li className="SurveyListItem">
-    <div className="SurveyListItem__name">{name}</div>
-    <button onClick={onSelect} className="SurveyListItem__button">Select</button>
-  </li>
-)
+const SurveyListItem = ({ selectedSurvey, onSelect }) => {
+  return(
+    <div className="SurveyListItem">
+      <button onClick={onSelect} className="SurveyListItem__button">
+        <SurveyDescription survey={selectedSurvey}/>
+      </button>
+    </div>
+  )
+}
 
 export default SurveyListItem

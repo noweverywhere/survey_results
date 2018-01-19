@@ -1,0 +1,10 @@
+.SurveyListItem__button {
+  background-color: #EEE;
+  margin: 0.5em 0;
+  width: 100%;
+  min-width: 250px;
+  cursor: pointer;
+}
+.SurveyListItem__button:hover {
+  background-color: #DDD;
+}

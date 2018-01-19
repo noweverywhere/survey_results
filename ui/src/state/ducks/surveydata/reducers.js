@@ -17,7 +17,13 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listStatus: loadingStates.LOADED,
-        listOfSurveys: action.data.survey_results
+        listOfSurveys: action.data.survey_results.map((survey) => ({
+            name: survey.name,
+            participantCount: survey.participant_count,
+            submittedResponseCount: survey.submitted_response_count,
+            responseRate: Math.round(parseFloat(survey.response_rate) * 100),
+            url: survey.url
+        }))
       }
     case types.LOADLIST_FAILED:
       return {
