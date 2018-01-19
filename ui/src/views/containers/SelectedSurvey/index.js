@@ -6,7 +6,6 @@ const mapStateToProps = (state) => ({
   ...state.surveyDataState
 })
 const mapDispatchToProps = {
-
   unselectSurvey: surveyDataOperations.unselectSurvey
 }
 
