@@ -18,6 +18,30 @@ describe('lib/api', () => {
   })
 
   describe('surveys.index', () => {
+    describe('handle success/failure', () => {
+      it('returns an object with success:false when something goes wrong', () => {
+        const repositoryUrl = 'https://arbitrary.example.com'
+        nock(repositoryUrl)
+          .get('/')
+          .reply(200, 'this is not html')
+
+        surveys.index({repositoryUrl}).then((response) => {
+          return expect(response.success).toEqual(false)
+        })
+      })
+
+      it('returns an object with success:true when request works', () => {
+        const repositoryUrl = 'https://arbitrary.example.com'
+        nock(repositoryUrl)
+          .get('/')
+          .reply(200, {foo: 'foo'})
+
+        surveys.index({repositoryUrl}).then((response) => {
+          return expect(response.success).toEqual(true)
+        })
+      })
+    })
+
     describe('points to the correct API address', () => {
       it('calls repositoryUrl when provided', () => {
         const repositoryUrl = 'https://arbitrary.example.com'
@@ -25,9 +49,8 @@ describe('lib/api', () => {
           .get('/')
           .reply(200, {foo: 'foo'})
 
-        expect.assertions(1)
-        return surveys.index({repositoryUrl}).then((data) => (
-          expect(data).toEqual({ foo: 'foo'})
+        return surveys.index({repositoryUrl}).then((response) => (
+          expect(response.data).toEqual({ foo: 'foo'})
         ))
       })
 
@@ -40,8 +63,8 @@ describe('lib/api', () => {
         process.env.PUBLIC_URL = 'https://example.com'
 
         expect.assertions(1)
-        return surveys.index({}).then((data) => (
-          expect(data).toEqual({ foo: 'foo'})
+        return surveys.index({}).then((response) => (
+          expect(response.data).toEqual({ foo: 'foo'})
         ))
       })
 
@@ -54,8 +77,8 @@ describe('lib/api', () => {
         process.env.PUBLIC_URL = 'https://example.com'
 
         expect.assertions(1)
-        return surveys.index({}).then((data) => (
-          expect(data).toEqual({ foo: 'foo'})
+        return surveys.index({}).then((response) => (
+          expect(response.data).toEqual({ foo: 'foo'})
         ))
       })
     })

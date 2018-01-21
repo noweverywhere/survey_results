@@ -13,9 +13,16 @@ export const surveys = {
 
     return fetch(repositoryUrl || apiUrl)
       .then(response => {
-        return response.json()
-      }).catch((error) => {
-        return error
+        return response.json().then(
+          (data) => ({
+            data,
+            success: true
+          })
+        )
       })
+      .catch((error) => ({
+          success: false,
+        })
+      )
   }
 }
