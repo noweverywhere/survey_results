@@ -10,7 +10,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "standard && react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "lint": "standard",
     "eject": "react-scripts eject"
   },
@@ -22,7 +22,11 @@
     "globals": [
       "fetch",
       "URL",
-      "it"
+      "it",
+      "describe",
+      "expect",
+      "beforeAll",
+      "afterAll"
     ]
   }
 }
