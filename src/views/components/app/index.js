@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import SurveysListContainer from '../../containers/surveys_list'
 import './styles.css'
 
 class App extends Component {
@@ -14,8 +15,7 @@ class App extends Component {
         <header className='App-header'>
           <h1 className='App-title'>Survey Results</h1>
         </header>
-        <p className='App-intro'>
-        </p>
+        <SurveysListContainer />
       </div>
     )
   }
