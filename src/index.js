@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import configureStore from './state/store'
 import './index.css'
-import App from './views/components/app'
+import App from './views/containers/app'
 import registerServiceWorker from './registerServiceWorker'
 
 const reduxStore = configureStore({})
