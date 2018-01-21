@@ -1,4 +1,5 @@
 import Duck from 'extensible-duck'
+import surveysDuck from '../surveys'
 
 export default new Duck({
   namespace: 'survey-results',
@@ -17,7 +18,10 @@ export default new Duck({
       default: return state
     }
   },
-  createors: (duck) => ({
-    appLoaded: () => ({ type: duck.types.LOADED })
+  creators: (duck) => ({
+    appLoaded: () => (dispatch) => {
+      dispatch({ type: duck.types.LOADED })
+      surveysDuck.creators.indexLoad(dispatch)
+    }
   })
 })
