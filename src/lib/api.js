@@ -8,7 +8,7 @@ export const surveys = {
     const apiUrl = (
       repositoryUrl ||
       process.env.API_BASE_URL ||
-      `${process.env.PUBLIC_URL}/surveys`
+      `${process.env.PUBLIC_URL}/surveys/index.json`
     )
 
     return fetch(repositoryUrl || apiUrl)

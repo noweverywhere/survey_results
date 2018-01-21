@@ -68,9 +68,9 @@ describe('lib/api', () => {
         ))
       })
 
-      it('calls `${PUBLIC_URL}/surveys` when API_BASE_URL is not available', () => {
+      it('calls `${PUBLIC_URL}/surveys/index.json` when API_BASE_URL is not available', () => {
         nock('https://example.com')
-          .get('/surveys')
+          .get('/surveys/index.json')
           .reply(200, {foo: 'foo'})
 
         process.env.API_BASE_URL = ''
