@@ -1,13 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import SurveysListItem from '../surveys_list_item'
 
-const SurveysListItem = ({onClick, url, name}) => (
-  <div>
-    <button onClick={ () => {onClick(url)} }>{name}</button>
-  </div>
-)
-
-const SurveysListComponent = ({onClick, list, loadingState}) => {
+export const SurveysListComponent = ({onClick, list, loadingState}) => {
   return (
     <div>
       {
