@@ -3,7 +3,8 @@ import appDuck from '../../../state/ducks/app'
 import AppComponent from '../../components/app/'
 
 const mapStateToProps = (state) => ({
-  ...state.app
+  ...state.app,
+  surveysListLoadStatus: state.surveys.indexLoadingStatus
 })
 const mapDispatchToProps = {
   onLoad: appDuck.creators.appLoaded
