@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-// import surveyDuck from '../../../state/ducks/surveys'
+import surveyDuck from '../../../state/ducks/surveys'
 import SurveysListComponent from '../../components/surveys_list/'
 
 const mapStateToProps = (state) => ({
@@ -7,9 +7,7 @@ const mapStateToProps = (state) => ({
   loadingState: state.surveys.indexLoadingStatus
 })
 const mapDispatchToProps = {
-  onClick: () => {
-    return {type: 'TODO: add selectSurvey creator to surveys duck'}
-  }
+  onClick: surveyDuck.creators.selectSurvey
 }
 
 export default connect(

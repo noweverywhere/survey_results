@@ -13,11 +13,15 @@ export default new Duck({
   types: [
     'INDEX_FAILED',
     'INDEX_LOADED',
-    'INDEX_LOADING'
+    'INDEX_LOADING',
+    'SURVEY_LOAD_STARTED',
+    'SURVEY_SELECTED'
   ],
   initialState: {
     indexLoadingStatus: NOT_LOADED,
     list: [],
+    selectedSurveyUrl: null,
+    selectedSurveyLoadStatus: null
   },
   reducer: (state, action, duck) => {
     switch(action.type) {
@@ -37,6 +41,16 @@ export default new Duck({
           ...state,
           indexLoadingStatus: FAILED,
         }
+      case duck.types.SURVEY_SELECTED:
+        return {
+          ...state,
+          selectedSurveyUrl: action.selectedSurveyUrl
+        }
+      case duck.types.SURVEY_LOAD_STARTED:
+        return {
+          ...state,
+          selectedSurveyLoadStatus: LOADING
+        }
       default: return state
     }
   },
@@ -47,6 +61,18 @@ export default new Duck({
         dispatch({type: duck.types.INDEX_LOADED, data: response.data})
       }).catch((error) => {
         dispatch({type: duck.types.INDEX_FAILED, data: error.data})
+      })
+    },
+    selectSurvey: (surveyUrl) => (dispatch) => {
+      dispatch({
+        type: duck.types.SURVEY_SELECTED,
+        selectedSurveyUrl: surveyUrl
+      })
+      duck.creators.loadSelectedSurvey(dispatch, surveyUrl)
+    },
+    loadSelectedSurvey: (dispatch, surveyUrl) => {
+      dispatch({
+        type: duck.types.SURVEY_LOAD_STARTED
       })
     }
   })
