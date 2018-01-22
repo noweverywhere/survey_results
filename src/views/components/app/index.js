@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import SurveysListContainer from '../../containers/surveys_list'
+import AppHeader from '../app_header'
 import loadingConstants from '../../../lib/loadStatusConstants'
 import './styles.css'
 
@@ -11,12 +12,12 @@ class App extends Component {
   }
 
   render () {
-    const { surveysListLoadStatus } = this.props
+    const { surveysListLoadStatus, selectedSurvey, unselectSurvey } = this.props
     return (
       <div className='App'>
-        <header className='App-header'>
-          <h1 className='App-title'>Survey Results</h1>
-        </header>
+        <AppHeader
+          selectedSurvey={selectedSurvey}
+          unselectSurvey={unselectSurvey} />
         {
           (() => {
             switch(surveysListLoadStatus) {

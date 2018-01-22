@@ -3,13 +3,18 @@ import { shallow } from 'enzyme'
 import { LOADED, LOADING, FAILED } from '../../../lib/loadStatusConstants'
 import App from './'
 import SurveysListContainer from '../../containers/surveys_list'
+import AppHeader from '../app_header'
+const noop = () => ({})
 
 describe('component/app', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div')
 
     shallow(
-      <App onLoad={() => ({})} surveysListLoadStatus={'foobar'} />,
+      <App
+        onLoad={noop}
+        unselectSurvey={noop}
+        surveysListLoadStatus={'foobar'} />,
       div
     )
   })
@@ -18,9 +23,30 @@ describe('component/app', () => {
     const spy = jest.fn()
     const div = document.createElement('div')
 
-    shallow(<App onLoad={spy} surveysListLoadStatus={'foobar'} />, div)
+    shallow(
+      <App
+        onLoad={spy}
+        unselectSurvey={noop}
+        surveysListLoadStatus={'foobar'} />,
+        div
+      )
 
     expect(spy.mock.calls.length).toEqual(1)
+  })
+
+  describe('AppHeader', () => {
+    it('renders AppHeader', () => {
+      const div = document.createElement('div')
+      const wrapper = shallow(
+        <App
+          onLoad={noop}
+          unselectSurvey={noop}
+          surveysListLoadStatus={ LOADED } />,
+        div
+      )
+
+      expect(wrapper.find(AppHeader).length).toEqual(1)
+    })
   })
 
   describe('depending on surveysListLoadStatus prop', () => {
@@ -28,7 +54,10 @@ describe('component/app', () => {
       it('renders SurveysList when surveysListLoadStatus=LOADED', () => {
         const div = document.createElement('div')
         const wrapper = shallow(
-          <App onLoad={() => ({})} surveysListLoadStatus={ LOADED } />,
+          <App
+            onLoad={noop}
+            unselectSurvey={noop}
+            surveysListLoadStatus={ LOADED } />,
           div
         )
 
@@ -38,7 +67,10 @@ describe('component/app', () => {
       it('does not render SurveysList when surveysListLoadStatus!==LOADED', () => {
         const div = document.createElement('div')
         const wrapper = shallow(
-          <App onLoad={() => ({})} surveysListLoadStatus={ LOADING } />,
+          <App
+            onLoad={noop}
+            unselectSurvey={noop}
+            surveysListLoadStatus={ LOADING } />,
           div
         )
 

@@ -15,7 +15,8 @@ export default new Duck({
     'INDEX_LOADED',
     'INDEX_LOADING',
     'SURVEY_LOAD_STARTED',
-    'SURVEY_SELECTED'
+    'SURVEY_SELECTED',
+    'SURVEY_UNSELECTED'
   ],
   initialState: {
     indexLoadingStatus: NOT_LOADED,
@@ -40,6 +41,12 @@ export default new Duck({
         return {
           ...state,
           indexLoadingStatus: FAILED,
+        }
+      case duck.types.SURVEY_UNSELECTED:
+        return {
+          ...state,
+          selectedSurveyUrl: null,
+          selectedSurveyLoadStatus: null
         }
       case duck.types.SURVEY_SELECTED:
         return {
@@ -70,10 +77,18 @@ export default new Duck({
       })
       duck.creators.loadSelectedSurvey(dispatch, surveyUrl)
     },
+    unselectSurvey: () => ({
+      type: duck.types.SURVEY_UNSELECTED
+    }),
     loadSelectedSurvey: (dispatch, surveyUrl) => {
       dispatch({
         type: duck.types.SURVEY_LOAD_STARTED
       })
     }
-  })
+  }),
+  selectors: {
+    selectedSurvey: ({surveys}) => (
+      surveys.list.filter((s) => s.url === surveys.selectedSurveyUrl).shift()
+    )
+  }
 })

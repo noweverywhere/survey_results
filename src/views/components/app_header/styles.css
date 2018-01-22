@@ -1,0 +1,9 @@
+.AppHeader {
+  background-color: #222;
+  padding: 20px;
+  color: white;
+}
+
+.AppHeader__title {
+  font-size: 1.5em;
+}
