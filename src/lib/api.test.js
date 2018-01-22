@@ -1,5 +1,5 @@
 import nock from 'nock'
-import {surveys} from './api'
+import {surveys, get} from './api'
 
 describe('lib/api', () => {
   let apiBaseUrl, publicUrl
@@ -17,26 +17,26 @@ describe('lib/api', () => {
     process.env.PUBLIC_URL = publicUrl
   })
 
-  describe('surveys.index', () => {
+  describe('get', () => {
     describe('handle success/failure', () => {
       it('returns an object with success:false when something goes wrong', () => {
-        const repositoryUrl = 'https://arbitrary.example.com'
-        nock(repositoryUrl)
+        const url = 'https://arbitrary.example.com'
+        nock(url)
           .get('/')
           .reply(200, 'this is not html')
 
-        surveys.index({repositoryUrl}).then((response) => {
+        get({url}).then((response) => {
           return expect(response.success).toEqual(false)
         })
       })
 
       it('returns an object with success:true when request works', () => {
-        const repositoryUrl = 'https://arbitrary.example.com'
-        nock(repositoryUrl)
+        const url = 'https://arbitrary.example.com'
+        nock(url)
           .get('/')
           .reply(200, {foo: 'foo'})
 
-        surveys.index({repositoryUrl}).then((response) => {
+        get({url}).then((response) => {
           return expect(response.success).toEqual(true)
         })
       })
