@@ -1,0 +1,14 @@
+{
+  "name": "surveys-results",
+  "version": "1.0.0",
+  "description": "Gui for showing survey results",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
