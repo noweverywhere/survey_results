@@ -1,6 +1,7 @@
 export const RESPONSE_NOT_OK = 'RESPONSE_NOT_OK'
 export const BAD_FORMAT = 'BAD_FORMAT'
 export const CONNECTIVITY_PROBLEMS = 'CONNECTIVITY_PROBLEMS'
+export const VALID_RATINGS_RESPONSES = [1, 2, 3, 4, 5]
 
 export default {
   RESPONSE_NOT_OK,
