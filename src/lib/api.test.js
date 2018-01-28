@@ -76,12 +76,12 @@ describe('lib/api', () => {
     it('appends the path to the surveys index', () => {
       nock(testApiBaseUrl)
        .get('/index.json')
-       .reply(200, {survey_results: 'bar'})
+       .reply(200, {survey_results: [{response_rate: 8}]})
 
       const promise = api(testApiBaseUrl).index()
 
       return expect(promise).resolves.toEqual({
-        data: 'bar',
+        data: [{response_rate: 8, responseRate: '800%'}],
         statusCode: 200,
         errorMessage: null,
         success: true
@@ -93,14 +93,14 @@ describe('lib/api', () => {
     it('appends the provided surveyUrl to the api base url', () => {
       nock(testApiBaseUrl)
        .get('/surveys/foo.json')
-       .reply(200, { survey_result_detail: 'bar' })
+       .reply(200, { foo: 'bar' })
 
       const promise = api(testApiBaseUrl).show({
         surveyUrl: '/surveys/foo.json'
       })
 
       return expect(promise).resolves.toEqual({
-        data: 'bar',
+        data: { foo: 'bar' },
         statusCode: 200,
         errorMessage: null,
         success: true

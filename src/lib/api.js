@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { reduceSurveyResultDetail } from './reducers'
+import { reduceSurveyResultDetail, reduceSurveyIndex } from './reducers'
 import {
   RESPONSE_NOT_OK,
   BAD_FORMAT,
@@ -45,7 +45,7 @@ export const api = (baseUrl) => ({
   index: () => {
     return get(`${baseUrl}/index.json`).then((outcome) => {
       return Object.assign(
-        outcome, {data: (outcome.data && outcome.data.survey_results)}
+        outcome, {data: (outcome.data && reduceSurveyIndex(outcome.data))}
       )
     })
   },

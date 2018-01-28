@@ -46,3 +46,14 @@ export const reduceSurveyResultDetail = (data) => {
     data, { themes: survey.themes.map(mapSurveyThemes) }
   )
 }
+
+export const reduceSurveyIndex = (data) => {
+  const indexResults = data.survey_results
+  if (!indexResults) return data
+
+  return indexResults.map((surveyIndexItem) => {
+    return Object.assign(surveyIndexItem, {
+      responseRate: `${Math.round(surveyIndexItem.response_rate * 100)}%`
+    })
+  })
+}
