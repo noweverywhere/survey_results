@@ -4,10 +4,10 @@
   "description": "Gui for showing survey results",
   "main": "index.js",
   "scripts": {
-    "test": "standard && jest",
-    "test:watch": "standard && jest --watch",
+    "test": "standard && API_BASE_URL='http://example.com' jest",
+    "test:watch": "standard && API_BASE_URL='http://example.com' jest --watch",
     "build": "webpack --config webpack.prod.js",
-    "dev": "webpack-dev-server --open --config webpack.dev.js",
+    "dev": "API_BASE_URL='http://localhost:8080/api' webpack-dev-server --open --config webpack.dev.js",
     "start": "npm run build && http-server ./dist",
     "lint:fix": "standard --fix"
   },
