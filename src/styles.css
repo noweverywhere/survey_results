@@ -1,3 +1,90 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
 body {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+.SurveyResults {
+  min-width: 400px;
+}
+
+@media screen and (min-width: 680px) {
+  .SurveyResults {
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+  }
+}
+
+.SurveyView {
+  max-width: 760px;
+  flex: 1;
+  background: #CCC;
+}
+
+.SurveyView__header,
+.SurveyView__body {
+  padding: 0.5em;
+  background: #CCC;
+}
+
+.SurveyList {
+  min-width: 200px;
+  background: #EEE;
+  padding: 0.5em;
+}
+
+.Survey__theme {
+  width: 100%;
+  margin-bottom: 0.5em;
+}
+.Survey__theme:nth-child(even),
+.Survey__theme:nth-child(odd) .Survey__question:nth-child(odd) {
+  background: #EFEFEF;
+}
+.Survey__theme:nth-child(odd),
+.Survey__theme:nth-child(even) .Survey__question:nth-child(odd) {
+  background: #E0E0E0;
+}
+
+.Survey__themeName {
+  font-weight: bold;
+}
+
+.SurveyList__list
+.SurveyList__itemButton {
+  width: 100%;
+  margin-bottom: 1.2em;
+  padding: 0.5em;
+}
+
+.SurveyList__itemName {
+  font-size: 1.2em;
+}
+
+.SurveyList__itemResponseRate {
+  font-weight: lighter;
+}
+
+.Survey__question {
+  padding: 0.25em;
+}
+
+.Survey__questionHeading {
+  width: 100%;
+}
+
+.Survey__themeAverage,
+.Survey__questionDetails {
+  text-align: center;
+}
+
+.Survey__themeName,
+.Survey__themeAverage,
+.Survey__questionHeading,
+.Survey__questionDetails {
+  padding: 0.3em;
 }

@@ -1,4 +1,4 @@
-import { emptyElement, replaceContents } from './view_helpers'
+import { createElement, emptyElement, replaceContents } from './view_helpers'
 
 const renderSurveyQuestions = (question) => (
   `
@@ -14,8 +14,8 @@ const renderSurveyTheme = (theme) => (
     <table class='Survey__theme'>
       <thead class='Survey__themeHeading'>
         <tr>
-          <td>${theme.name}</td>
-          <td>Response Average</td>
+          <td class="Survey__themeName">${theme.name}</td>
+          <td class="Survey__themeAverage">Response Average</td>
       </thead>
       <tbody class='Survey__themeQuestions'>
         ${
@@ -30,29 +30,43 @@ const renderSurveyTheme = (theme) => (
 )
 
 export const ListView = (appNode) => {
-  const domElement = document.createElement('div')
+  const domElement = createElement('div', 'SurveyList')
   appNode.appendChild(domElement)
 
   return {
     showLoading: () => {
-      domElement.innerHTML = '<div>LOADING SURVEYS</div>'
+      replaceContents(domElement, '<div>LOADING SURVEYS</div>')
     },
     showSurveys: ({surveys, selectSurvey}) => {
-      const buttons = surveys.map((survey) => {
-        const button = document.createElement('button')
-        button.innerText = survey.name
+      const heading = createElement('h3', 'SurveyList__heading')
+      const surveyListDiv = createElement('div', 'SurveyList__list')
+
+      heading.innerText = 'Select a survey below'
+      surveyListDiv.appendChild(heading)
+      surveys.map((survey) => {
+        const buttonDiv = createElement('div', 'SurveyList__item')
+        const button = createElement('button', 'SurveyList__itemButton')
+        button.innerHTML = `
+          <div class='SurveyList__itemName'>${survey.name}</div>
+          <div class='SurveyList__itemResponseRate'>
+            Response rate: ${survey.responseRate}
+          </div>
+        `
         button.onclick = () => selectSurvey(survey)
-        return button
+        buttonDiv.appendChild(button)
+        surveyListDiv.appendChild(buttonDiv)
       })
-      replaceContents(domElement, buttons)
+
+      emptyElement(domElement)
+      domElement.appendChild(surveyListDiv)
     }
   }
 }
 
 export const SurveyView = (appNode) => {
-  const domElement = document.createElement('div')
-  const headerElement = document.createElement('div')
-  const surveyDisplay = document.createElement('div')
+  const domElement = createElement('div', 'SurveyView')
+  const headerElement = createElement('div', 'SurveyView__header')
+  const surveyDisplay = createElement('div', 'SurveyView__body')
   domElement.appendChild(headerElement)
   domElement.appendChild(surveyDisplay)
 
@@ -64,14 +78,13 @@ export const SurveyView = (appNode) => {
       surveyDisplay.innerHTML = '<div>LOADING SURVEY</div>'
     },
     showSelectedSurvey: ({survey}) => {
-      const title = document.createElement('h1')
+      const title = document.createElement('h2')
       title.innerText = survey.name
       replaceContents(headerElement, title)
     },
     showSurvey: ({survey}) => {
-      const renderedSurvey = document.createElement('div')
+      const renderedSurvey = createElement('div', 'SurveyDisplay')
       const renderedThemes = survey.themes.map(renderSurveyTheme)
-      renderedSurvey.className = 'SurveyDisplay'
       replaceContents(renderedSurvey, renderedThemes)
       replaceContents(surveyDisplay, renderedSurvey)
     }
