@@ -47,6 +47,14 @@ export const api = (baseUrl) => ({
         outcome, {data: (outcome.data && outcome.data.survey_results)}
       )
     })
+  },
+  show: ({surveyUrl}) => {
+    return get(baseUrl + surveyUrl).then((outcome) => {
+      if (!outcome.success) return outcome
+      return Object.assign(outcome, {
+        data: outcome.data.survey_result_detail
+      })
+    })
   }
 })
 

@@ -20,4 +20,26 @@ export const ListView = (appNode) => {
   }
 }
 
-export default { ListView }
+export const SurveyView = (appNode) => {
+  const domElement = document.createElement('div')
+  const headerElement = document.createElement('div')
+  const surveyDisplay = document.createElement('div')
+  domElement.appendChild(headerElement)
+  domElement.appendChild(surveyDisplay)
+
+  appNode.appendChild(domElement)
+
+  return {
+    showLoading: () => {
+      emptyElement(surveyDisplay)
+      surveyDisplay.innerHTML = '<div>LOADING SURVEY</div>'
+    },
+    showSelectedSurvey: ({survey}) => {
+      const title = document.createElement('h1')
+      title.innerText = survey.name
+      replaceContents(headerElement, title)
+    }
+  }
+}
+
+export default { ListView, SurveyView }

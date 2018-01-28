@@ -88,4 +88,23 @@ describe('lib/api', () => {
       })
     })
   })
+
+  describe('api().show', () => {
+    it('appends the provided surveyUrl to the api base url', () => {
+      nock(testApiBaseUrl)
+       .get('/surveys/foo.json')
+       .reply(200, { survey_result_detail: 'bar' })
+
+      const promise = api(testApiBaseUrl).show({
+        surveyUrl: '/surveys/foo.json'
+      })
+
+      return expect(promise).resolves.toEqual({
+        data: 'bar',
+        statusCode: 200,
+        errorMessage: null,
+        success: true
+      })
+    })
+  })
 })
