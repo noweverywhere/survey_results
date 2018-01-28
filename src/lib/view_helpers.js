@@ -1,14 +1,28 @@
+export const createElement = (tag, className) => {
+  const el = document.createElement(tag)
+  el.className = className
+  return el
+}
+
 export const emptyElement = (parentElement) => {
   while (parentElement.children.length) {
     parentElement.removeChild(parentElement.firstChild)
   }
 }
 
+export const moveChildren = (oldParent, newParent) => {
+  const numberOfChildren = oldParent.children.length
+  let i = 0
+  for (i; i < numberOfChildren; i += 1) {
+    newParent.appendChild(oldParent.children[i])
+  }
+}
+
 export const appendNodeOrString = (parentElement, child) => {
-  const node = document.createElement('div')
+  const temporaryParent = document.createElement('div')
   if (typeof child === 'string') {
-    node.innerHTML = child
-    parentElement.appendChild(node)
+    temporaryParent.innerHTML = child
+    moveChildren(temporaryParent, parentElement)
   } else {
     parentElement.appendChild(child)
   }
