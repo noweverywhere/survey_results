@@ -1,3 +1,3 @@
-window.onload = () => {
-  console.log('Hello World')
-}
+import app from './lib/app.js'
+
+window.onload = app.init('#app_root')
