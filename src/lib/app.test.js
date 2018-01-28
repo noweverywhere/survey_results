@@ -1,11 +1,18 @@
 import app from './app'
 import api from './api'
+import views from './view'
 
 describe('app', () => {
   describe('init', () => {
     const appDiv = document.createElement('div')
+    let mockListView
 
     beforeEach(() => {
+      mockListView = {
+        showLoading: jest.fn(),
+        showFailure: jest.fn()
+      }
+      views.ListView = jest.fn(() => (mockListView))
       appDiv.id = 'app_test'
       document.body.appendChild(appDiv)
 
@@ -24,6 +31,12 @@ describe('app', () => {
       app.init('#app_test')()
 
       expect(api.init).toBeCalledWith('http://example.com')
+    })
+
+    it('marks the list view as loading', () => {
+      app.init('#app_test')()
+
+      expect(mockListView.showLoading.mock.calls.length).toEqual(1)
     })
   })
 })
