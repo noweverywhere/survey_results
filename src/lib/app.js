@@ -7,12 +7,12 @@ const SurveyResultsController = ({apiInstance, view}) => ({
     view.showSelectedSurvey({survey})
     apiInstance.show({surveyUrl: survey.url}).then((outcome) => {
       if (outcome.success === true) {
-        console.log('Not yet implimented showing outcome of show', outcome)
+        view.showSurvey({survey: outcome.data})
       } else {
         console.log('Not yet implimented showing error of show', outcome)
       }
-    }).catch(() => {
-      console.log('Not yet implimented showing serious errors of show', outcome)
+    }).catch((e) => {
+      console.log('Not yet implimented showing serious errors of show', e)
     })
   }
 })
