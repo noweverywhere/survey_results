@@ -12,7 +12,8 @@ module.exports = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: 'public' },
-      { from: 'src/index.html' }
+      { from: 'src/index.html' },
+      { from: 'src/styles.css' }
     ])
   ]
 }
