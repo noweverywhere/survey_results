@@ -1,6 +1,7 @@
 import api from './api'
-import views from './view'
 import { createElement } from './view_helpers'
+import { ListView } from './list_view'
+import { SurveyView } from './survey_view'
 
 const SurveyResultsController = ({apiInstance, view}) => ({
   selectSurvey: (survey) => {
@@ -40,8 +41,8 @@ const ListController = ({apiInstance, view}) => ({
 const init = (queryString) => () => {
   const rootNode = document.querySelector(queryString)
   const appNode = createElement('div', 'SurveyResults')
-  const listView = views.ListView(appNode)
-  const surveysView = views.SurveyView(appNode)
+  const listView = ListView(appNode)
+  const surveysView = SurveyView(appNode)
   const apiInstance = api.init(process.env.API_BASE_URL)
   const surveysController = SurveyResultsController({
     apiInstance, view: surveysView

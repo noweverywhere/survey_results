@@ -1,18 +1,19 @@
 import app from './app'
 import api from './api'
-import views from './view'
+const mockShowLoading = jest.fn()
+jest.mock('./list_view', (args) => (
+  {
+    ListView: () => ({
+      showLoading: mockShowLoading,
+      showFailure: jest.fn()
+    })
+  }
+))
 
 describe('app', () => {
   describe('init', () => {
     const appDiv = document.createElement('div')
-    let mockListView
-
     beforeEach(() => {
-      mockListView = {
-        showLoading: jest.fn(),
-        showFailure: jest.fn()
-      }
-      views.ListView = jest.fn(() => (mockListView))
       appDiv.id = 'app_test'
       document.body.appendChild(appDiv)
 
@@ -21,6 +22,7 @@ describe('app', () => {
           return new Promise((resolve) => { resolve({}) })
         }
       }))
+      mockShowLoading.mockReset()
     })
 
     it('returns a function', () => {
@@ -36,7 +38,7 @@ describe('app', () => {
     it('marks the list view as loading', () => {
       app.init('#app_test')()
 
-      expect(mockListView.showLoading.mock.calls.length).toEqual(1)
+      expect(mockShowLoading.mock.calls.length).toEqual(1)
     })
   })
 })
