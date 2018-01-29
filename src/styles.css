@@ -88,3 +88,29 @@ body {
 .Survey__questionDetails {
   padding: 0.3em;
 }
+
+.Survey__distMapBarGraph {
+  display: flex;
+  height: 1.2em;
+}
+
+.Survey__distMapBar {
+  flex: 1;
+  background: #BBB;
+  margin: 1px;
+  position: relative;
+}
+
+.Survey__distMapBar:hover {
+  background: #999;
+}
+.Survey__distMapBar:hover .Survey__distMapBarContent {
+  background: #66F;
+}
+
+.Survey__distMapBarContent {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: #99F;
+}

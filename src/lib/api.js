@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { reduceSurveyResultDetail, reduceSurveyIndex } from './reducers'
+import { reduceSurveyIndex } from './reducers'
 import {
   RESPONSE_NOT_OK,
   BAD_FORMAT,
@@ -50,12 +50,7 @@ export const api = (baseUrl) => ({
     })
   },
   show: ({surveyUrl}) => {
-    return get(baseUrl + surveyUrl).then((outcome) => {
-      if (!outcome.success) return outcome
-      return Object.assign(outcome, {
-        data: reduceSurveyResultDetail(outcome.data)
-      })
-    })
+    return get(baseUrl + surveyUrl)
   }
 })
 

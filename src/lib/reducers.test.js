@@ -1,8 +1,7 @@
 import {
   tidyResponses,
   averageResponses,
-  mapQuestions,
-  reduceSurveyResultDetail
+  mapQuestions
 } from './reducers'
 
 describe('lib/reducers', () => {
@@ -32,15 +31,6 @@ describe('lib/reducers', () => {
       ]
     }
   ]
-
-  const serverResponse = {
-    survey_result_detail: {
-      themes: [{
-        'name': 'foobar',
-        questions
-      }]
-    }
-  }
 
   describe('tidyResponses', () => {
     const untidyResponses = [
@@ -77,22 +67,14 @@ describe('lib/reducers', () => {
       expect(mappedQuestions[0].responses.average).toEqual(4.6)
       expect(mappedQuestions[1].responses.average).toEqual(5)
     })
-  })
 
-  describe('reduceSurveyResultDetail', () => {
-    it('returns response from unchanged if survey_result_detail prop is unavailable', () => {
-      const noSurveyResponse = { data: { foo: 'bar' } }
-      expect(reduceSurveyResultDetail(noSurveyResponse)).toEqual({
-        data: {foo: 'bar'}
+    it('returns list of questions with responses grouped in distribution map', () => {
+      const responses = questions.map(mapQuestions)[0].responses
+
+      expect(responses.distribution.groups.length).toEqual(5)
+      expect(responses.distribution.groups.pop()).toEqual({
+        count: 3, height: 100, percentage: 60, value: 5
       })
-    })
-
-    it('reduces survey data and returns it under "themes" key', () => {
-      expect(
-        reduceSurveyResultDetail(
-          serverResponse
-        ).themes[0].questions[0].responses.average
-      ).toEqual(4.6)
     })
   })
 })

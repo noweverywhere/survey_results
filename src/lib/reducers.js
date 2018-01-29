@@ -1,5 +1,32 @@
 import { VALID_RATINGS_RESPONSES } from './constants'
 
+export const calculateRelativeHeight = (maxPercentage) => (group) => {
+  return Object.assign(
+    group,
+    { height: ((group.percentage / maxPercentage) * 100) }
+  )
+}
+
+export const generateResponseDistribution = (responses) => {
+  const responseGroups = VALID_RATINGS_RESPONSES.map((value) => {
+    const count = responses.filter((n) => n === value).length
+    const percentage = (count / responses.length) * 100
+    return {
+      value,
+      count,
+      percentage: percentage
+    }
+  })
+  const largestGroup = responseGroups.reduce((acc, group) => (
+    acc.percentage > group.percentage ? acc : group
+  ))
+  return {
+    groups: responseGroups.map(
+      calculateRelativeHeight(largestGroup.percentage)
+    )
+  }
+}
+
 export const tidyResponses = (acc, response) => {
   const content = parseInt(response.response_content, 10)
   if (VALID_RATINGS_RESPONSES.includes(content)) {
@@ -25,7 +52,8 @@ export const mapQuestions = (question) => {
   return Object.assign(
     question, {
       responses: {
-        average: Math.round(averageResponses(cleanedResponses) * 100) / 100
+        average: Math.round(averageResponses(cleanedResponses) * 100) / 100,
+        distribution: generateResponseDistribution(cleanedResponses)
       }
     }
   )
@@ -35,16 +63,6 @@ export const mapSurveyThemes = (theme) => {
   return Object.assign(theme, {
     questions: theme.questions.map(mapQuestions)
   })
-}
-
-export const reduceSurveyResultDetail = (data) => {
-  const survey = data.survey_result_detail
-
-  if (!survey) return data
-
-  return Object.assign(
-    data, { themes: survey.themes.map(mapSurveyThemes) }
-  )
 }
 
 export const reduceSurveyIndex = (data) => {
