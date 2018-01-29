@@ -1,6 +1,7 @@
 const merge = require('webpack-merge')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common.js')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = merge(common, {
   devtool: 'inline-source-map',
@@ -8,6 +9,9 @@ module.exports = merge(common, {
     contentBase: './dist'
   },
   plugins: [
+    new Dotenv({
+      path: './.env.prod'
+    }),
     new UglifyJsPlugin()
   ]
 })
