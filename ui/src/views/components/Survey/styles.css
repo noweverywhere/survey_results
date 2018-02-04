@@ -1,0 +1,17 @@
+.SurveyTable {
+  width: 600px;
+  margin-bottom: 1.5em;
+}
+
+.SurveyTable tr:nth-child(even) {
+  background: #EEE;
+}
+
+.SurveyTable__themeName {
+  font-weight: bold;
+}
+
+.SurveyQuestion {
+  padding-bottom: 0.5em;
+}
+

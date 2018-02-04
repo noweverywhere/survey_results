@@ -1,0 +1,47 @@
+{
+  "name": "survey-results-ui",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.1.0",
+    "recharts": "^1.0.0-beta.9",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "proxy": {
+    "/api/v1": {
+      "target": "http://localhost:3001/"
+    }
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "standard"
+  },
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest-enzyme": "^4.0.2",
+    "nock": "^9.1.6",
+    "redux-logger": "^3.0.6",
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "it",
+      "jest",
+      "beforeAll",
+      "afterAll",
+      "expect"
+    ],
+    "ignore": [
+      "build/"
+    ]
+  }
+}

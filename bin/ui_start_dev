@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pushd ui
+
+npm run start
+
+popd

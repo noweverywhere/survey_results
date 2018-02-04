@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pushd ui
+
+npm run build
+
+popd
+
+cp -r ui/build api/public
